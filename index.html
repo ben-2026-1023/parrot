@@ -1,145 +1,357 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
-<head><!DOCTYPE html>
-<html lang="zh-TW">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="鸚鵡蛋管理">
 <title>🦜 鸚鵡蛋管理平台</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Noto+Sans+TC:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#ffffff;--bg2:#f5f5f4;--bg3:#efede8;
-  --text:#1a1a1a;--text2:#6b6b6b;--text3:#9b9b9b;
-  --border:rgba(0,0,0,0.12);--border2:rgba(0,0,0,0.22);
-  --green:#1D9E75;--red:#E24B4A;--blue:#185FA5;--blue-bg:#EBF3FC;--blue-text:#185FA5;
-  --radius:10px;--radius-lg:14px;
-}
-@media(prefers-color-scheme:dark){
-  :root{
-    --bg:#1c1c1e;--bg2:#2c2c2e;--bg3:#3a3a3c;
-    --text:#f2f2f7;--text2:#aeaeb2;--text3:#636366;
-    --border:rgba(255,255,255,0.12);--border2:rgba(255,255,255,0.25);
-    --blue-bg:#0c2d4a;--blue-text:#6aafe6;
-  }
+  --cream:#FDF6EC;
+  --cream2:#F5ECD8;
+  --cream3:#EDE0C4;
+  --brown:#6B4226;
+  --brown2:#8B5E3C;
+  --brown3:#C4956A;
+  --green:#3A7D44;
+  --green2:#5A9E64;
+  --green-bg:#EAF4EC;
+  --red:#C0392B;
+  --red-bg:#FDECEA;
+  --gold:#C9933A;
+  --gold-bg:#FDF3E3;
+  --text:#2C1810;
+  --text2:#6B4A35;
+  --text3:#A07850;
+  --border:rgba(107,66,38,0.15);
+  --border2:rgba(107,66,38,0.25);
+  --shadow:0 2px 12px rgba(107,66,38,0.12);
+  --radius:12px;
+  --radius-lg:18px;
+  --radius-xl:24px;
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-html,body{height:100%;background:var(--bg3);font-family:-apple-system,BlinkMacSystemFont,'PingFang TC','Heiti TC',sans-serif;font-size:16px;color:var(--text)}
-.app{max-width:480px;margin:0 auto;min-height:100vh;background:var(--bg3);padding-bottom:80px}
-.header{background:var(--bg);text-align:center;padding:20px 16px 14px;border-bottom:0.5px solid var(--border);position:sticky;top:0;z-index:40}
-.header h1{font-size:19px;font-weight:600;color:var(--text)}
-.header p{font-size:13px;color:var(--text2);margin-top:2px}
-.bottom-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;display:flex;background:var(--bg);border-top:0.5px solid var(--border);z-index:50;padding-bottom:env(safe-area-inset-bottom)}
-.bnav-btn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px 4px 8px;gap:3px;background:none;border:none;cursor:pointer;color:var(--text2);font-size:10px;font-weight:500;transition:color .15s}
-.bnav-btn i{font-size:24px}
-.bnav-btn.active{color:var(--text)}
-.tab{display:none;padding:16px}.tab.active{display:block}
-.section-title{font-size:18px;font-weight:600;color:var(--text);margin-bottom:16px;display:flex;align-items:center;gap:8px}
-.card{background:var(--bg);border-radius:var(--radius-lg);padding:16px;margin-bottom:14px;border:0.5px solid var(--border)}
-.form-group{margin-bottom:16px}
-.form-label{display:block;font-size:14px;font-weight:600;color:var(--text2);margin-bottom:7px}
+html{height:100%}
+body{
+  min-height:100%;
+  background:var(--cream2);
+  font-family:'Noto Sans TC',sans-serif;
+  font-size:16px;
+  color:var(--text);
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(196,149,106,0.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(58,125,68,0.06) 0%, transparent 50%);
+}
+.app{max-width:480px;margin:0 auto;min-height:100vh;padding-bottom:90px}
+
+/* ── Header ── */
+.header{
+  background:var(--brown);
+  padding:0 0 0;
+  position:sticky;top:0;z-index:40;
+  overflow:hidden;
+}
+.header-inner{
+  padding:18px 20px 14px;
+  position:relative;
+}
+.header-deco{
+  position:absolute;right:-10px;top:-10px;
+  font-size:80px;opacity:0.08;
+  pointer-events:none;line-height:1;
+}
+.header h1{
+  font-family:'Noto Serif TC',serif;
+  font-size:20px;font-weight:700;
+  color:#FDF6EC;
+  letter-spacing:1px;
+}
+.header p{font-size:12px;color:rgba(253,246,236,0.6);margin-top:3px}
+
+/* ── Bottom Nav ── */
+.bottom-nav{
+  position:fixed;bottom:0;left:50%;transform:translateX(-50%);
+  width:100%;max-width:480px;
+  display:flex;
+  background:var(--brown);
+  z-index:50;
+  padding-bottom:env(safe-area-inset-bottom);
+}
+.bnav-btn{
+  flex:1;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;padding:11px 4px 9px;gap:3px;
+  background:none;border:none;cursor:pointer;
+  color:rgba(253,246,236,0.45);font-size:10px;font-weight:500;
+  font-family:'Noto Sans TC',sans-serif;
+  border-top:2px solid transparent;
+  transition:all .2s;
+}
+.bnav-btn .nav-icon{font-size:22px;line-height:1}
+.bnav-btn.active{color:#FDF6EC;border-top-color:var(--gold)}
+
+/* ── Tabs ── */
+.tab{display:none;padding:16px 14px}.tab.active{display:block}
+
+/* ── Section title ── */
+.section-title{
+  font-family:'Noto Serif TC',serif;
+  font-size:19px;font-weight:700;
+  color:var(--brown);
+  margin-bottom:16px;
+  display:flex;align-items:center;gap:10px;
+}
+.section-title .title-icon{font-size:22px}
+
+/* ── Cards ── */
+.card{
+  background:var(--cream);
+  border-radius:var(--radius-xl);
+  padding:20px;
+  margin-bottom:14px;
+  border:1px solid var(--border);
+  box-shadow:var(--shadow);
+}
+
+/* ── Form ── */
+.form-group{margin-bottom:18px}
+.form-label{
+  display:block;font-size:13px;font-weight:600;
+  color:var(--text2);margin-bottom:8px;
+  letter-spacing:.3px;
+}
+.form-label .hint{font-weight:400;color:var(--text3);font-size:11px;margin-left:4px}
+
 input[type=text],input[type=number],input[type=date]{
-  width:100%;padding:14px 14px;font-size:17px;
-  border:0.5px solid var(--border2);border-radius:var(--radius);
-  background:var(--bg2);color:var(--text);outline:none;
-  -webkit-appearance:none;appearance:none;font-family:inherit;
+  width:100%;padding:14px 16px;font-size:16px;
+  border:1.5px solid var(--border2);
+  border-radius:var(--radius);
+  background:var(--cream2);
+  color:var(--text);outline:none;
+  -webkit-appearance:none;appearance:none;
+  font-family:'Noto Sans TC',sans-serif;
+  transition:border-color .2s,box-shadow .2s;
 }
-input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(24,95,165,0.12)}
+input:focus{
+  border-color:var(--brown2);
+  box-shadow:0 0 0 3px rgba(107,66,38,0.1);
+  background:var(--cream);
+}
 select.native-select{
-  width:100%;padding:14px 14px;font-size:17px;
-  border:0.5px solid var(--border2);border-radius:var(--radius);
-  background:var(--bg2);color:var(--text);outline:none;
-  -webkit-appearance:none;appearance:none;font-family:inherit;
+  width:100%;padding:14px 16px;font-size:16px;
+  border:1.5px solid var(--border2);
+  border-radius:var(--radius);
+  background:var(--cream2);
+  color:var(--text);outline:none;
+  -webkit-appearance:none;appearance:none;
+  font-family:'Noto Sans TC',sans-serif;
+  transition:border-color .2s;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24'%3E%3Cpath fill='%236B4226' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right 14px center;
+  padding-right:40px;
 }
-select.native-select:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(24,95,165,0.12)}
+select.native-select:focus{border-color:var(--brown2);box-shadow:0 0 0 3px rgba(107,66,38,0.1)}
 
-/* ── 自訂種類選擇器 ── */
+/* ── Species Picker ── */
 .species-picker{position:relative}
-.species-input-wrap{position:relative}
-.species-input{width:100%;padding:14px 44px 14px 14px;font-size:17px;border:0.5px solid var(--border2);border-radius:var(--radius);background:var(--bg2);color:var(--text);outline:none;font-family:inherit;-webkit-appearance:none}
-.species-input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(24,95,165,0.12)}
-.species-arrow{position:absolute;right:14px;top:50%;transform:translateY(-50%);pointer-events:none;color:var(--text2);font-size:18px}
-.species-dropdown{display:none;position:absolute;top:calc(100% + 6px);left:0;right:0;background:var(--bg);border:0.5px solid var(--border2);border-radius:var(--radius-lg);z-index:200;max-height:320px;overflow-y:auto;box-shadow:0 8px 24px rgba(0,0,0,.12)}
+.species-input{
+  width:100%;padding:14px 44px 14px 16px;font-size:16px;
+  border:1.5px solid var(--border2);
+  border-radius:var(--radius);
+  background:var(--cream2);
+  color:var(--text);outline:none;
+  font-family:'Noto Sans TC',sans-serif;
+  -webkit-appearance:none;
+  transition:border-color .2s,box-shadow .2s;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24'%3E%3Cpath fill='%236B4226' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right 14px center;
+}
+.species-input:focus{
+  border-color:var(--brown2);
+  box-shadow:0 0 0 3px rgba(107,66,38,0.1);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24'%3E%3Cpath fill='%236B4226' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right 14px center;
+  background-color:var(--cream);
+}
+.species-dropdown{
+  display:none;position:absolute;top:calc(100% + 8px);left:0;right:0;
+  background:var(--cream);
+  border:1.5px solid var(--border2);
+  border-radius:var(--radius-lg);
+  z-index:200;max-height:300px;overflow-y:auto;
+  box-shadow:0 8px 32px rgba(107,66,38,0.18);
+}
 .species-dropdown.open{display:block}
-.species-group-label{font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;padding:10px 14px 4px;background:var(--bg2)}
-.species-option{padding:13px 14px;font-size:16px;cursor:pointer;color:var(--text);border-bottom:0.5px solid var(--border)}
+.species-group-label{
+  font-size:11px;font-weight:700;color:var(--text3);
+  letter-spacing:.8px;padding:10px 16px 5px;
+  background:var(--cream2);
+  border-bottom:1px solid var(--border);
+  text-transform:uppercase;
+}
+.species-option{
+  padding:13px 16px;font-size:15px;cursor:pointer;
+  color:var(--text);border-bottom:1px solid var(--border);
+  transition:background .1s;
+}
 .species-option:last-child{border-bottom:none}
-.species-option:active,.species-option.highlighted{background:var(--blue-bg);color:var(--blue-text)}
-.species-add-row{padding:12px 14px;font-size:15px;color:var(--blue-text);cursor:pointer;display:flex;align-items:center;gap:8px;border-top:0.5px solid var(--border);font-weight:600}
-.species-add-row:active{background:var(--blue-bg)}
-.species-tag{display:inline-flex;align-items:center;gap:6px;background:var(--blue-bg);color:var(--blue-text);border-radius:20px;padding:4px 12px;font-size:14px;font-weight:600;margin-bottom:6px}
+.species-option:active{background:var(--cream2)}
+.species-add-row{
+  padding:13px 16px;font-size:14px;color:var(--green);
+  cursor:pointer;display:flex;align-items:center;gap:8px;
+  border-top:1px solid var(--border);font-weight:600;
+}
+.species-add-row:active{background:var(--green-bg)}
 
-.btn-main{width:100%;padding:17px;font-size:17px;font-weight:600;border-radius:var(--radius-lg);cursor:pointer;border:none;background:var(--text);color:var(--bg);margin-top:4px;font-family:inherit;letter-spacing:.2px}
-.btn-main:active{opacity:.75;transform:scale(.98)}
-.btn-sm-del{background:none;border:none;color:var(--text3);cursor:pointer;padding:8px;border-radius:8px;font-size:20px;line-height:1}
-.btn-sm-del:active{color:var(--red)}
+/* ── Main Button ── */
+.btn-main{
+  width:100%;padding:16px;font-size:16px;font-weight:700;
+  border-radius:var(--radius-lg);cursor:pointer;border:none;
+  background:var(--brown);color:var(--cream);
+  font-family:'Noto Serif TC',serif;
+  letter-spacing:.5px;
+  box-shadow:0 4px 16px rgba(107,66,38,0.3);
+  transition:all .2s;
+  margin-top:6px;
+}
+.btn-main:active{transform:scale(.97);box-shadow:0 2px 8px rgba(107,66,38,0.2)}
+
+/* ── Metrics ── */
 .metrics-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
-.metric{background:var(--bg);border-radius:var(--radius);padding:14px;text-align:center;border:0.5px solid var(--border)}
-.metric-label{font-size:11px;color:var(--text2);margin-bottom:5px;font-weight:500}
-.metric-value{font-size:20px;font-weight:600;color:var(--text)}
+.metric{
+  background:var(--cream);
+  border-radius:var(--radius-lg);padding:14px 12px;
+  text-align:center;border:1px solid var(--border);
+  box-shadow:var(--shadow);
+}
+.metric-label{font-size:11px;color:var(--text2);margin-bottom:5px;font-weight:600;letter-spacing:.3px}
+.metric-value{font-size:20px;font-weight:700;color:var(--text);font-family:'Noto Serif TC',serif}
 .metric-value.green{color:var(--green)}.metric-value.red{color:var(--red)}
-.rec-item{background:var(--bg);padding:16px;border-radius:var(--radius-lg);margin-bottom:10px;border:0.5px solid var(--border)}
+
+/* ── Record Item ── */
+.rec-item{
+  background:var(--cream);padding:16px;
+  border-radius:var(--radius-lg);margin-bottom:10px;
+  border:1px solid var(--border);
+  box-shadow:var(--shadow);
+  position:relative;overflow:hidden;
+}
+.rec-item::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;
+  width:4px;background:var(--brown3);border-radius:4px 0 0 4px;
+}
 .rec-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px}
-.rec-name{font-size:17px;font-weight:600;color:var(--text)}
+.rec-name{font-size:17px;font-weight:700;color:var(--text);font-family:'Noto Serif TC',serif}
 .rec-date-label{font-size:12px;color:var(--text3);margin-top:3px}
 .rec-row{display:flex;gap:14px;flex-wrap:wrap}
 .rec-info{font-size:13px;color:var(--text2)}
 .rec-info span{color:var(--text);font-weight:600}
-.rec-profit{font-size:15px;font-weight:600;margin-top:8px;padding-top:8px;border-top:0.5px solid var(--border)}
+.rec-profit{font-size:15px;font-weight:700;margin-top:10px;padding-top:10px;border-top:1px dashed var(--border2)}
 .profit-pos{color:var(--green)}.profit-neg{color:var(--red)}
-.badge{display:inline-block;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:600;background:var(--blue-bg);color:var(--blue-text);margin-left:6px}
-.empty{text-align:center;padding:50px 20px;color:var(--text2);font-size:16px}
-.week-picker{margin-bottom:16px}
-.summary-card{background:var(--bg);border-radius:var(--radius-lg);padding:16px;margin-bottom:16px;border:0.5px solid var(--border)}
-.sum-row{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:0.5px solid var(--border)}
+.badge{
+  display:inline-block;padding:3px 10px;border-radius:20px;
+  font-size:11px;font-weight:600;
+  background:var(--gold-bg);color:var(--gold);
+  border:1px solid rgba(201,147,58,0.3);
+  margin-left:7px;
+}
+.btn-sm-del{
+  background:none;border:none;color:var(--text3);
+  cursor:pointer;padding:6px;border-radius:8px;font-size:20px;line-height:1;
+}
+.btn-sm-del:active{color:var(--red)}
+
+/* ── Empty ── */
+.empty{
+  text-align:center;padding:50px 20px;
+  color:var(--text3);font-size:15px;line-height:2;
+}
+
+/* ── Summary Card ── */
+.summary-card{
+  background:var(--cream);border-radius:var(--radius-xl);
+  padding:18px 20px;margin-bottom:16px;
+  border:1px solid var(--border);box-shadow:var(--shadow);
+}
+.sum-row{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:11px 0;border-bottom:1px dashed var(--border2);
+}
 .sum-row:last-child{border-bottom:none;padding-top:14px;margin-top:4px}
-.sum-label{font-size:15px;color:var(--text2)}
-.sum-val{font-size:16px;font-weight:600;color:var(--text)}
-.week-sum-item{background:var(--bg);padding:14px;border-radius:var(--radius-lg);margin-bottom:10px;border:0.5px solid var(--border)}
+.sum-label{font-size:14px;color:var(--text2)}
+.sum-val{font-size:16px;font-weight:700;color:var(--text);font-family:'Noto Serif TC',serif}
+.total-big{font-size:26px!important;color:var(--green)!important}
+.total-big.neg{color:var(--red)!important}
+
+/* ── Week item ── */
+.week-sum-item{
+  background:var(--cream);padding:14px 16px;
+  border-radius:var(--radius-lg);margin-bottom:10px;
+  border:1px solid var(--border);box-shadow:var(--shadow);
+}
 .wsi-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+
+/* ── Species chips ── */
 .cat-section{margin-bottom:22px}
-.cat-header{font-size:12px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.8px;padding:8px 0;border-bottom:0.5px solid var(--border);margin-bottom:10px}
+.cat-header{
+  font-size:11px;font-weight:700;color:var(--text3);
+  text-transform:uppercase;letter-spacing:.8px;
+  padding:6px 0 8px;border-bottom:1px solid var(--border);margin-bottom:10px;
+}
 .species-chips{display:flex;flex-wrap:wrap;gap:8px}
-.chip{padding:8px 14px;border:0.5px solid var(--border);border-radius:20px;font-size:14px;background:var(--bg2);color:var(--text)}
+.chip{
+  padding:7px 14px;border:1px solid var(--border2);
+  border-radius:20px;font-size:14px;
+  background:var(--cream2);color:var(--text);
+}
 .chip-del{display:inline-flex;align-items:center;gap:5px}
 .chip-del button{background:none;border:none;color:var(--red);cursor:pointer;font-size:16px;padding:0 2px;line-height:1;font-weight:700}
-.sub-title{font-size:14px;font-weight:600;color:var(--text2);margin-bottom:10px}
-.total-highlight{font-size:26px!important;color:var(--green)!important}
-.total-highlight.neg{color:var(--red)!important}
+.sub-title{font-size:13px;font-weight:700;color:var(--text2);margin-bottom:10px;text-transform:uppercase;letter-spacing:.5px}
+.week-picker{margin-bottom:16px}
+
+/* ── Feather deco ── */
+.feather-deco{
+  text-align:center;padding:12px 0 4px;
+  font-size:28px;opacity:0.35;letter-spacing:8px;
+}
 </style>
 </head>
 <body>
 <div class="app">
+
   <div class="header">
-    <h1>🦜 鸚鵡蛋管理平台</h1>
-    <p id="today-label"></p>
+    <div class="header-inner">
+      <div class="header-deco">🦜</div>
+      <h1>🦜 鸚鵡蛋管理平台</h1>
+      <p id="today-label"></p>
+    </div>
   </div>
 
+  <!-- 新增收購 -->
   <div id="tab-record" class="tab active">
-    <div class="section-title"><i class="ti ti-plus-circle"></i>新增收購</div>
+    <div class="feather-deco">🪶 🥚 🪶</div>
+    <div class="section-title"><span class="title-icon">📋</span>新增收購記錄</div>
     <div class="card">
       <div class="form-group">
         <label class="form-label">收購日期</label>
         <input type="date" id="rec-date">
       </div>
-
-      <!-- 種類選擇器 -->
       <div class="form-group">
-        <label class="form-label">鸚鵡種類　<span style="font-size:12px;font-weight:400;color:var(--text3)">可搜尋或直接輸入新增</span></label>
+        <label class="form-label">鸚鵡種類 <span class="hint">可搜尋或直接輸入新種類</span></label>
         <div class="species-picker" id="species-picker">
-          <div class="species-input-wrap">
-            <input class="species-input" id="species-input" type="text" placeholder="搜尋或輸入種類名稱..." autocomplete="off" readonly>
-            <i class="ti ti-chevron-down species-arrow"></i>
-          </div>
+          <input class="species-input" id="species-input" type="text"
+            placeholder="點此搜尋或選擇種類…" autocomplete="off">
           <div class="species-dropdown" id="species-dropdown"></div>
         </div>
         <input type="hidden" id="rec-species-val">
         <input type="hidden" id="rec-species-cat">
       </div>
-
       <div class="form-group">
         <label class="form-label">數量（顆）</label>
         <input type="number" id="rec-qty" min="1" inputmode="numeric" placeholder="請輸入數量">
@@ -153,7 +365,7 @@ select.native-select:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(24
         <input type="number" id="rec-sell" min="0" inputmode="decimal" placeholder="請輸入賣出價">
       </div>
       <div class="form-group">
-        <label class="form-label">收購縣市（選填）</label>
+        <label class="form-label">收購縣市 <span class="hint">選填</span></label>
         <select class="native-select" id="rec-city">
           <option value="">── 不填 ──</option>
           <option>台北市</option><option>新北市</option><option>桃園市</option><option>台中市</option>
@@ -165,22 +377,24 @@ select.native-select:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(24
         </select>
       </div>
       <div class="form-group">
-        <label class="form-label">收購人姓名（選填）</label>
+        <label class="form-label">收購人姓名 <span class="hint">選填</span></label>
         <input type="text" id="rec-seller" placeholder="輸入姓名">
       </div>
       <div class="form-group">
-        <label class="form-label">備註（選填）</label>
+        <label class="form-label">備註 <span class="hint">選填</span></label>
         <input type="text" id="rec-note" placeholder="其他備註">
       </div>
-      <button class="btn-main" onclick="addRecord()">✅ 確認新增</button>
+      <button class="btn-main" onclick="addRecord()">🥚 確認新增</button>
     </div>
 
-    <div class="section-title"><i class="ti ti-list"></i>本週記錄</div>
+    <div class="section-title"><span class="title-icon">📅</span>本週記錄</div>
     <div id="this-week-records"></div>
   </div>
 
+  <!-- 每週結算 -->
   <div id="tab-weekly" class="tab">
-    <div class="section-title"><i class="ti ti-calendar-week"></i>每週結算</div>
+    <div class="feather-deco">🪶 📊 🪶</div>
+    <div class="section-title"><span class="title-icon">🗓️</span>每週結算</div>
     <div class="week-picker">
       <label class="form-label">選擇週別</label>
       <select class="native-select" id="week-select" onchange="renderWeekly()"></select>
@@ -188,8 +402,10 @@ select.native-select:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(24
     <div id="weekly-content"></div>
   </div>
 
+  <!-- 每月報表 -->
   <div id="tab-monthly" class="tab">
-    <div class="section-title"><i class="ti ti-chart-bar"></i>每月報表</div>
+    <div class="feather-deco">🪶 💰 🪶</div>
+    <div class="section-title"><span class="title-icon">📈</span>每月報表</div>
     <div class="week-picker">
       <label class="form-label">選擇月份</label>
       <select class="native-select" id="month-select" onchange="renderMonthly()"></select>
@@ -197,17 +413,33 @@ select.native-select:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(24
     <div id="monthly-content"></div>
   </div>
 
+  <!-- 種類管理 -->
   <div id="tab-species" class="tab">
-    <div class="section-title"><i class="ti ti-leaf"></i>種類管理</div>
-    <p style="font-size:14px;color:var(--text2);margin-bottom:16px;line-height:1.6">預設種類不能刪除，自訂種類可以刪除。<br>也可以在新增收購頁面直接輸入新種類。</p>
+    <div class="feather-deco">🦜 🌿 🦜</div>
+    <div class="section-title"><span class="title-icon">🌿</span>種類管理</div>
+    <div class="card" style="background:var(--gold-bg);border-color:rgba(201,147,58,0.25)">
+      <p style="font-size:14px;color:var(--text2);line-height:1.8">
+        📌 預設種類不能刪除<br>
+        ✏️ 在新增收購頁面直接輸入新種類即可自動新增<br>
+        🗑️ 自訂種類可以從這裡刪除
+      </p>
+    </div>
     <div id="species-list"></div>
   </div>
 
   <nav class="bottom-nav">
-    <button class="bnav-btn active" onclick="switchTab('record',this)"><i class="ti ti-plus-circle"></i>新增收購</button>
-    <button class="bnav-btn" onclick="switchTab('weekly',this)"><i class="ti ti-calendar-week"></i>每週結算</button>
-    <button class="bnav-btn" onclick="switchTab('monthly',this)"><i class="ti ti-chart-bar"></i>每月報表</button>
-    <button class="bnav-btn" onclick="switchTab('species',this)"><i class="ti ti-leaf"></i>種類管理</button>
+    <button class="bnav-btn active" onclick="switchTab('record',this)">
+      <span class="nav-icon">🥚</span>新增收購
+    </button>
+    <button class="bnav-btn" onclick="switchTab('weekly',this)">
+      <span class="nav-icon">🗓️</span>每週結算
+    </button>
+    <button class="bnav-btn" onclick="switchTab('monthly',this)">
+      <span class="nav-icon">📈</span>每月報表
+    </button>
+    <button class="bnav-btn" onclick="switchTab('species',this)">
+      <span class="nav-icon">🦜</span>種類管理
+    </button>
   </nav>
 </div>
 
@@ -230,7 +462,6 @@ function save(){
   localStorage.setItem('p_records',JSON.stringify(records));
   localStorage.setItem('p_custom',JSON.stringify(customSpecies));
 }
-
 function today(){return new Date().toISOString().split('T')[0]}
 function getWeekKey(ds){
   const d=new Date(ds),day=d.getDay(),diff=d.getDate()-day+(day===0?-6:1);
@@ -242,88 +473,62 @@ function fMoney(n){return Math.round(Number(n)).toLocaleString('zh-TW')+'元'}
 document.getElementById('today-label').textContent=fDateFull(today());
 document.getElementById('rec-date').value=today();
 
-/* ════════════════════════════════
-   種類選擇器邏輯
-════════════════════════════════ */
+/* ── Species Picker ── */
 let pickerOpen=false;
-let searchQuery='';
 let selectedName='';
 let selectedCat='';
 
 function getAllSpecies(){
   const all=[];
-  for(const[cat,list]of Object.entries(species)){
-    list.forEach(n=>all.push({name:n,cat}));
-  }
+  for(const[cat,list]of Object.entries(species)) list.forEach(n=>all.push({name:n,cat}));
   customSpecies.forEach(s=>all.push({name:s.name,cat:s.cat}));
   return all;
 }
 
 function renderDropdown(query){
   const dd=document.getElementById('species-dropdown');
-  const all=getAllSpecies();
   const q=query.trim().toLowerCase();
-  let html='';
-  let grouped={};
-  let exactMatch=false;
-
-  all.forEach(s=>{
+  let grouped={};let exactMatch=false;
+  getAllSpecies().forEach(s=>{
     if(!q||s.name.toLowerCase().includes(q)){
       if(!grouped[s.cat])grouped[s.cat]=[];
       grouped[s.cat].push(s);
       if(s.name===query.trim())exactMatch=true;
     }
   });
-
+  let html='';
   for(const[cat,list]of Object.entries(grouped)){
-    html+=`<div class="species-group-label">${cat}</div>`;
-    list.forEach(s=>{
-      html+=`<div class="species-option" onclick="selectSpecies('${s.name.replace(/'/g,"\\'")}','${s.cat.replace(/'/g,"\\'")}')">
-        ${s.name}
-      </div>`;
-    });
+    html+=`<div class="species-group-label">🐦 ${cat}</div>`;
+    list.forEach(s=>{html+=`<div class="species-option" ontouchend="selectSpecies('${s.name.replace(/'/g,"\\'")}','${s.cat.replace(/'/g,"\\'")}')">　${s.name}</div>`});
   }
-
-  if(q && !exactMatch){
-    html+=`<div class="species-add-row" onclick="addAndSelectSpecies('${query.trim().replace(/'/g,"\\'")}')">
-      <i class="ti ti-plus"></i> 新增「${query.trim()}」為新種類
-    </div>`;
+  if(query.trim()&&!exactMatch){
+    html+=`<div class="species-add-row" ontouchend="addAndSelectSpecies('${query.trim().replace(/'/g,"\\'")}')">＋ 新增「${query.trim()}」</div>`;
   }
-
-  if(!html){
-    html=`<div class="species-add-row" onclick="addAndSelectSpecies('${query.trim().replace(/'/g,"\\'")}')">
-      <i class="ti ti-plus"></i> 新增「${query.trim()}」為新種類
-    </div>`;
+  if(!html&&query.trim()){
+    html=`<div class="species-add-row" ontouchend="addAndSelectSpecies('${query.trim().replace(/'/g,"\\'")}')">＋ 新增「${query.trim()}」</div>`;
   }
-
   dd.innerHTML=html;
 }
 
 function openPicker(){
   const inp=document.getElementById('species-input');
   const dd=document.getElementById('species-dropdown');
-  inp.readOnly=false;
   inp.value='';
-  searchQuery='';
   pickerOpen=true;
   dd.classList.add('open');
   renderDropdown('');
-  inp.focus();
 }
 
 function closePicker(){
-  const inp=document.getElementById('species-input');
   const dd=document.getElementById('species-dropdown');
   pickerOpen=false;
   dd.classList.remove('open');
-  inp.readOnly=true;
-  if(selectedName) inp.value=selectedName;
-  else inp.value='';
+  const inp=document.getElementById('species-input');
+  inp.value=selectedName||'';
 }
 
 function selectSpecies(name,cat){
-  selectedName=name;
-  selectedCat=cat;
+  selectedName=name;selectedCat=cat;
   document.getElementById('rec-species-val').value=name;
   document.getElementById('rec-species-cat').value=cat;
   closePicker();
@@ -332,29 +537,21 @@ function selectSpecies(name,cat){
 function addAndSelectSpecies(name){
   if(!name)return;
   const cat='自訂種類';
-  customSpecies.push({name,cat});
-  save();
+  if(!customSpecies.find(s=>s.name===name)){customSpecies.push({name,cat});save();}
   selectSpecies(name,cat);
 }
 
-document.getElementById('species-input').addEventListener('input',function(){
-  searchQuery=this.value;
-  renderDropdown(searchQuery);
-});
-
-document.getElementById('species-input').addEventListener('click',function(){
-  if(!pickerOpen) openPicker();
-});
-
+const inp=document.getElementById('species-input');
+inp.addEventListener('focus',function(){if(!pickerOpen)openPicker()});
+inp.addEventListener('input',function(){renderDropdown(this.value)});
+document.addEventListener('touchstart',function(e){
+  if(pickerOpen&&!document.getElementById('species-picker').contains(e.target)) closePicker();
+},{passive:true});
 document.addEventListener('click',function(e){
-  if(pickerOpen && !document.getElementById('species-picker').contains(e.target)){
-    closePicker();
-  }
+  if(pickerOpen&&!document.getElementById('species-picker').contains(e.target)) closePicker();
 });
 
-/* ════════════════════════════════
-   新增收購
-════════════════════════════════ */
+/* ── Add Record ── */
 function addRecord(){
   const date=document.getElementById('rec-date').value;
   const specName=document.getElementById('rec-species-val').value;
@@ -368,7 +565,6 @@ function addRecord(){
   if(!date||!specName||!qty||isNaN(cost)||isNaN(sell)){alert('請填寫：日期、種類、數量、成本、賣出價格');return}
   records.push({id:Date.now(),date,specName,cat,qty,cost,sell,city,seller,note});
   save();
-  // 清空
   selectedName='';selectedCat='';
   document.getElementById('rec-species-val').value='';
   document.getElementById('rec-species-cat').value='';
@@ -385,14 +581,15 @@ function deleteRecord(id){
   records=records.filter(r=>r.id!==id);save();renderThisWeek();
 }
 
-/* ════════════════════════════════
-   本週記錄
-════════════════════════════════ */
+/* ── This Week ── */
 function renderThisWeek(){
   const wk=getWeekKey(today());
   const wr=records.filter(r=>getWeekKey(r.date)===wk);
   const el=document.getElementById('this-week-records');
-  if(!wr.length){el.innerHTML='<div class="empty">📭 本週尚無收購記錄</div>';return}
+  if(!wr.length){
+    el.innerHTML='<div class="empty">🥚 本週尚無收購記錄<br><span style="font-size:13px">新增第一筆開始記帳吧！</span></div>';
+    return;
+  }
   const totalCost=wr.reduce((s,r)=>s+r.cost*r.qty,0);
   const totalRev=wr.reduce((s,r)=>s+r.sell*r.qty,0);
   const totalQty=wr.reduce((s,r)=>s+r.qty,0);
@@ -412,21 +609,19 @@ function renderThisWeek(){
             <div class="rec-name">${r.specName}<span class="badge">${r.cat}</span></div>
             <div class="rec-date-label">${fDateFull(r.date)}${r.city?' · '+r.city:''}${r.seller?' · '+r.seller:''}</div>
           </div>
-          <button class="btn-sm-del" onclick="deleteRecord(${r.id})"><i class="ti ti-trash"></i></button>
+          <button class="btn-sm-del" onclick="deleteRecord(${r.id})">🗑️</button>
         </div>
         <div class="rec-row">
           <div class="rec-info">數量 <span>${r.qty}顆</span></div>
           <div class="rec-info">成本 <span>${r.cost.toLocaleString('zh-TW')}元</span></div>
           <div class="rec-info">賣出 <span>${r.sell.toLocaleString('zh-TW')}元</span></div>
         </div>
-        <div class="rec-profit ${p>=0?'profit-pos':'profit-neg'}">利潤：${fMoney(p)}</div>
-        ${r.note?`<div style="font-size:12px;color:var(--text2);margin-top:6px">備註：${r.note}</div>`:''}
+        <div class="rec-profit ${p>=0?'profit-pos':'profit-neg'}">${p>=0?'🟢':'🔴'} 利潤：${fMoney(p)}</div>
+        ${r.note?`<div style="font-size:12px;color:var(--text3);margin-top:6px">📝 ${r.note}</div>`:''}
       </div>`}).join('')}`;
 }
 
-/* ════════════════════════════════
-   每週結算
-════════════════════════════════ */
+/* ── Weekly ── */
 function buildWeekOptions(){
   const weeks=[...new Set(records.map(r=>getWeekKey(r.date)))].sort().reverse();
   const cur=getWeekKey(today());if(!weeks.includes(cur))weeks.unshift(cur);
@@ -443,7 +638,7 @@ function renderWeekly(){
   const el=document.getElementById('weekly-content');
   if(!wk){el.innerHTML='<div class="empty">無資料</div>';return}
   const wr=records.filter(r=>getWeekKey(r.date)===wk);
-  if(!wr.length){el.innerHTML='<div class="empty">📭 本週尚無記錄</div>';return}
+  if(!wr.length){el.innerHTML='<div class="empty">🥚 本週尚無記錄</div>';return}
   const totalCost=wr.reduce((s,r)=>s+r.cost*r.qty,0);
   const totalRev=wr.reduce((s,r)=>s+r.sell*r.qty,0);
   const totalQty=wr.reduce((s,r)=>s+r.qty,0);
@@ -457,12 +652,12 @@ function renderWeekly(){
       <div class="sum-row"><span class="sum-label">總成本支出</span><span class="sum-val" style="color:var(--red)">${fMoney(totalCost)}</span></div>
       <div class="sum-row"><span class="sum-label">總營業額</span><span class="sum-val" style="color:var(--green)">${fMoney(totalRev)}</span></div>
       <div class="sum-row"><span class="sum-label">利潤率</span><span class="sum-val">${margin}%</span></div>
-      <div class="sum-row"><span class="sum-label" style="font-size:16px;color:var(--text);font-weight:600">本週利潤</span><span class="sum-val total-highlight ${profit<0?'neg':''}">${fMoney(profit)}</span></div>
+      <div class="sum-row"><span class="sum-label" style="font-size:16px;font-weight:700;color:var(--text)">本週利潤</span><span class="sum-val total-big ${profit<0?'neg':''}">${fMoney(profit)}</span></div>
     </div>
     <div class="sub-title">各分類彙整</div>
     ${Object.entries(catS).map(([cat,d])=>{const p=d.rev-d.cost;return`
       <div class="week-sum-item">
-        <div class="wsi-head"><span style="font-weight:600;font-size:16px">${cat}</span><span class="badge">${d.qty}顆</span></div>
+        <div class="wsi-head"><span style="font-weight:700;font-size:15px;font-family:'Noto Serif TC',serif">🐦 ${cat}</span><span class="badge">${d.qty}顆</span></div>
         <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:4px">
           <span class="rec-info">成本 <span style="color:var(--red)">${fMoney(d.cost)}</span></span>
           <span class="rec-info">營收 <span style="color:var(--green)">${fMoney(d.rev)}</span></span>
@@ -481,13 +676,11 @@ function renderWeekly(){
           <span class="rec-info">成本 <span>${r.cost.toLocaleString('zh-TW')}元</span></span>
           <span class="rec-info">賣出 <span>${r.sell.toLocaleString('zh-TW')}元</span></span>
         </div>
-        <div class="rec-profit ${p>=0?'profit-pos':'profit-neg'}">利潤：${fMoney(p)}</div>
+        <div class="rec-profit ${p>=0?'profit-pos':'profit-neg'}">${p>=0?'🟢':'🔴'} 利潤：${fMoney(p)}</div>
       </div>`}).join('')}`;
 }
 
-/* ════════════════════════════════
-   每月報表
-════════════════════════════════ */
+/* ── Monthly ── */
 function buildMonthOptions(){
   const months=[...new Set(records.map(r=>r.date.slice(0,7)))].sort().reverse();
   const cur=today().slice(0,7);if(!months.includes(cur))months.unshift(cur);
@@ -501,7 +694,7 @@ function renderMonthly(){
   const el=document.getElementById('monthly-content');
   if(!m){el.innerHTML='<div class="empty">無資料</div>';return}
   const mr=records.filter(r=>r.date.startsWith(m));
-  if(!mr.length){el.innerHTML='<div class="empty">📭 本月尚無記錄</div>';return}
+  if(!mr.length){el.innerHTML='<div class="empty">🥚 本月尚無記錄</div>';return}
   const totalCost=mr.reduce((s,r)=>s+r.cost*r.qty,0);
   const totalRev=mr.reduce((s,r)=>s+r.sell*r.qty,0);
   const totalQty=mr.reduce((s,r)=>s+r.qty,0);
@@ -513,7 +706,7 @@ function renderMonthly(){
       <div class="sum-row"><span class="sum-label">${y}年${parseInt(mo)}月 總收購量</span><span class="sum-val">${totalQty} 顆</span></div>
       <div class="sum-row"><span class="sum-label">總成本支出</span><span class="sum-val" style="color:var(--red)">${fMoney(totalCost)}</span></div>
       <div class="sum-row"><span class="sum-label">總營業額</span><span class="sum-val" style="color:var(--green)">${fMoney(totalRev)}</span></div>
-      <div class="sum-row"><span class="sum-label" style="font-size:16px;color:var(--text);font-weight:600">月淨利潤</span><span class="sum-val total-highlight ${profit<0?'neg':''}">${fMoney(profit)}</span></div>
+      <div class="sum-row"><span class="sum-label" style="font-size:16px;font-weight:700;color:var(--text)">月淨利潤</span><span class="sum-val total-big ${profit<0?'neg':''}">${fMoney(profit)}</span></div>
     </div>
     <div class="sub-title">各週彙整</div>
     ${weeks.map(wk=>{
@@ -533,17 +726,15 @@ function renderMonthly(){
       </div>`}).join('')}`;
 }
 
-/* ════════════════════════════════
-   種類管理
-════════════════════════════════ */
+/* ── Species ── */
 function renderSpecies(){
   const el=document.getElementById('species-list');
   let html='';
   for(const[cat,list]of Object.entries(species)){
-    html+=`<div class="cat-section"><div class="cat-header">${cat}</div><div class="species-chips">${list.map(s=>`<span class="chip">${s}</span>`).join('')}</div></div>`;
+    html+=`<div class="cat-section"><div class="cat-header">🐦 ${cat}</div><div class="species-chips">${list.map(s=>`<span class="chip">${s}</span>`).join('')}</div></div>`;
   }
   if(customSpecies.length){
-    html+=`<div class="cat-section"><div class="cat-header">自訂種類</div><div class="species-chips">${customSpecies.map((s,i)=>`<span class="chip chip-del">${s.name} <small style="color:var(--text2);font-size:11px">${s.cat}</small><button onclick="deleteCustom(${i})">×</button></span>`).join('')}</div></div>`;
+    html+=`<div class="cat-section"><div class="cat-header">✏️ 自訂種類</div><div class="species-chips">${customSpecies.map((s,i)=>`<span class="chip chip-del">${s.name}<button onclick="deleteCustom(${i})">×</button></span>`).join('')}</div></div>`;
   }
   el.innerHTML=html;
 }
@@ -564,463 +755,6 @@ function switchTab(t,btn){
   window.scrollTo(0,0);
 }
 
-renderThisWeek();
-</script>
-</body>
-</html>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="鸚鵡蛋管理">
-<title>🦜 鸚鵡蛋管理平台</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
-<style>
-:root{
-  --bg:#ffffff;--bg2:#f5f5f4;--bg3:#efede8;
-  --text:#1a1a1a;--text2:#6b6b6b;--text3:#9b9b9b;
-  --border:rgba(0,0,0,0.12);--border2:rgba(0,0,0,0.2);
-  --green:#1D9E75;--red:#E24B4A;--blue:#185FA5;--blue-bg:#EBF3FC;--blue-text:#185FA5;
-  --radius:10px;--radius-lg:14px;
-}
-@media(prefers-color-scheme:dark){
-  :root{
-    --bg:#1c1c1e;--bg2:#2c2c2e;--bg3:#3a3a3c;
-    --text:#f2f2f7;--text2:#aeaeb2;--text3:#636366;
-    --border:rgba(255,255,255,0.12);--border2:rgba(255,255,255,0.2);
-    --blue-bg:#0c2d4a;--blue-text:#6aafe6;
-  }
-}
-*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-html,body{height:100%;background:var(--bg3);font-family:-apple-system,BlinkMacSystemFont,'PingFang TC','Heiti TC',sans-serif;font-size:16px;color:var(--text)}
-.app{max-width:480px;margin:0 auto;min-height:100vh;background:var(--bg3);padding-bottom:80px}
-.header{background:var(--bg);text-align:center;padding:20px 16px 14px;border-bottom:0.5px solid var(--border);position:sticky;top:0;z-index:40}
-.header h1{font-size:19px;font-weight:600;color:var(--text)}
-.header p{font-size:13px;color:var(--text2);margin-top:2px}
-.bottom-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;display:flex;background:var(--bg);border-top:0.5px solid var(--border);z-index:50;padding-bottom:env(safe-area-inset-bottom)}
-.bnav-btn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px 4px 8px;gap:3px;background:none;border:none;cursor:pointer;color:var(--text2);font-size:10px;font-weight:500;transition:color .15s}
-.bnav-btn i{font-size:24px}
-.bnav-btn.active{color:var(--text)}
-.tab{display:none;padding:16px}.tab.active{display:block}
-.section-title{font-size:18px;font-weight:600;color:var(--text);margin-bottom:16px;display:flex;align-items:center;gap:8px}
-.card{background:var(--bg);border-radius:var(--radius-lg);padding:16px;margin-bottom:14px;border:0.5px solid var(--border)}
-.form-group{margin-bottom:16px}
-.form-label{display:block;font-size:14px;font-weight:600;color:var(--text2);margin-bottom:7px}
-select,input[type=text],input[type=number],input[type=date]{
-  width:100%;padding:14px 14px;font-size:17px;
-  border:0.5px solid var(--border2);border-radius:var(--radius);
-  background:var(--bg2);color:var(--text);outline:none;
-  -webkit-appearance:none;appearance:none;
-  font-family:inherit;
-}
-select:focus,input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(24,95,165,0.12)}
-.btn-main{
-  width:100%;padding:17px;font-size:17px;font-weight:600;
-  border-radius:var(--radius-lg);cursor:pointer;border:none;
-  background:var(--text);color:var(--bg);margin-top:4px;
-  font-family:inherit;letter-spacing:.2px;
-}
-.btn-main:active{opacity:.75;transform:scale(.98)}
-.btn-sm-del{background:none;border:none;color:var(--text3);cursor:pointer;padding:8px;border-radius:8px;font-size:20px;line-height:1}
-.btn-sm-del:active{color:var(--red)}
-.metrics-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
-.metric{background:var(--bg);border-radius:var(--radius);padding:14px;text-align:center;border:0.5px solid var(--border)}
-.metric-label{font-size:11px;color:var(--text2);margin-bottom:5px;font-weight:500}
-.metric-value{font-size:20px;font-weight:600;color:var(--text)}
-.metric-value.green{color:var(--green)}.metric-value.red{color:var(--red)}
-.rec-item{background:var(--bg);padding:16px;border-radius:var(--radius-lg);margin-bottom:10px;border:0.5px solid var(--border)}
-.rec-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px}
-.rec-name{font-size:17px;font-weight:600;color:var(--text)}
-.rec-date-label{font-size:12px;color:var(--text3);margin-top:3px}
-.rec-row{display:flex;gap:14px;flex-wrap:wrap}
-.rec-info{font-size:13px;color:var(--text2)}
-.rec-info span{color:var(--text);font-weight:600}
-.rec-profit{font-size:15px;font-weight:600;margin-top:8px;padding-top:8px;border-top:0.5px solid var(--border)}
-.profit-pos{color:var(--green)}.profit-neg{color:var(--red)}
-.badge{display:inline-block;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:600;background:var(--blue-bg);color:var(--blue-text);margin-left:6px}
-.empty{text-align:center;padding:50px 20px;color:var(--text2);font-size:16px}
-.week-picker{margin-bottom:16px}
-.summary-card{background:var(--bg);border-radius:var(--radius-lg);padding:16px;margin-bottom:16px;border:0.5px solid var(--border)}
-.sum-row{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:0.5px solid var(--border)}
-.sum-row:last-child{border-bottom:none;padding-top:14px;margin-top:4px}
-.sum-label{font-size:15px;color:var(--text2)}
-.sum-val{font-size:16px;font-weight:600;color:var(--text)}
-.week-sum-item{background:var(--bg);padding:14px;border-radius:var(--radius-lg);margin-bottom:10px;border:0.5px solid var(--border)}
-.wsi-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
-.cat-section{margin-bottom:22px}
-.cat-header{font-size:12px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.8px;padding:8px 0 8px;border-bottom:0.5px solid var(--border);margin-bottom:10px}
-.species-chips{display:flex;flex-wrap:wrap;gap:8px}
-.chip{padding:8px 14px;border:0.5px solid var(--border);border-radius:20px;font-size:14px;background:var(--bg2);color:var(--text)}
-.chip-del{display:inline-flex;align-items:center;gap:5px}
-.chip-del button{background:none;border:none;color:var(--red);cursor:pointer;font-size:16px;padding:0 2px;line-height:1;font-weight:700}
-.divider{height:0.5px;background:var(--border);margin:16px 0}
-.sub-title{font-size:14px;font-weight:600;color:var(--text2);margin-bottom:10px}
-.total-highlight{font-size:26px!important;color:var(--green)!important}
-.total-highlight.neg{color:var(--red)!important}
-</style>
-</head>
-<body>
-<div class="app">
-  <div class="header">
-    <h1>🦜 鸚鵡蛋管理平台</h1>
-    <p id="today-label"></p>
-  </div>
-
-  <div id="tab-record" class="tab active">
-    <div class="section-title"><i class="ti ti-plus-circle"></i>新增收購</div>
-    <div class="card">
-      <div class="form-group">
-        <label class="form-label">收購日期</label>
-        <input type="date" id="rec-date">
-      </div>
-      <div class="form-group">
-        <label class="form-label">鸚鵡種類</label>
-        <select id="rec-species"></select>
-      </div>
-      <div class="form-group">
-        <label class="form-label">數量（顆）</label>
-        <input type="number" id="rec-qty" min="1" inputmode="numeric" placeholder="請輸入數量">
-      </div>
-      <div class="form-group">
-        <label class="form-label">收購成本（元 / 顆）</label>
-        <input type="number" id="rec-cost" min="0" inputmode="decimal" placeholder="請輸入成本">
-      </div>
-      <div class="form-group">
-        <label class="form-label">賣出價格（元 / 顆）</label>
-        <input type="number" id="rec-sell" min="0" inputmode="decimal" placeholder="請輸入賣出價">
-      </div>
-      <div class="form-group">
-        <label class="form-label">收購縣市（選填）</label>
-        <select id="rec-city">
-          <option value="">── 不填 ──</option>
-          <option>台北市</option><option>新北市</option><option>桃園市</option><option>台中市</option>
-          <option>台南市</option><option>高雄市</option><option>基隆市</option><option>新竹市</option>
-          <option>新竹縣</option><option>苗栗縣</option><option>彰化縣</option><option>南投縣</option>
-          <option>雲林縣</option><option>嘉義市</option><option>嘉義縣</option><option>屏東縣</option>
-          <option>宜蘭縣</option><option>花蓮縣</option><option>台東縣</option><option>澎湖縣</option>
-          <option>金門縣</option><option>連江縣</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label class="form-label">收購人姓名（選填）</label>
-        <input type="text" id="rec-seller" placeholder="輸入姓名">
-      </div>
-      <div class="form-group">
-        <label class="form-label">備註（選填）</label>
-        <input type="text" id="rec-note" placeholder="其他備註">
-      </div>
-      <button class="btn-main" onclick="addRecord()">✅ 確認新增</button>
-    </div>
-
-    <div class="section-title"><i class="ti ti-list"></i>本週記錄</div>
-    <div id="this-week-records"></div>
-  </div>
-
-  <div id="tab-weekly" class="tab">
-    <div class="section-title"><i class="ti ti-calendar-week"></i>每週結算</div>
-    <div class="week-picker">
-      <label class="form-label">選擇週別</label>
-      <select id="week-select" onchange="renderWeekly()"></select>
-    </div>
-    <div id="weekly-content"></div>
-  </div>
-
-  <div id="tab-monthly" class="tab">
-    <div class="section-title"><i class="ti ti-chart-bar"></i>每月報表</div>
-    <div class="week-picker">
-      <label class="form-label">選擇月份</label>
-      <select id="month-select" onchange="renderMonthly()"></select>
-    </div>
-    <div id="monthly-content"></div>
-  </div>
-
-  <div id="tab-species" class="tab">
-    <div class="section-title"><i class="ti ti-leaf"></i>種類管理</div>
-    <p style="font-size:14px;color:var(--text2);margin-bottom:16px;line-height:1.6">預設種類不能刪除，可自行新增自訂種類。</p>
-    <div id="species-list"></div>
-    <div class="divider"></div>
-    <div style="font-size:16px;font-weight:600;color:var(--text);margin-bottom:14px">新增自訂種類</div>
-    <div class="card">
-      <div class="form-group">
-        <label class="form-label">種類名稱</label>
-        <input type="text" id="new-species-name" placeholder="例：灰胸吸蜜">
-      </div>
-      <div class="form-group">
-        <label class="form-label">所屬分類</label>
-        <select id="new-species-cat">
-          <option value="凱克類">凱克類</option>
-          <option value="月輪類">月輪類</option>
-          <option value="小太陽類">小太陽類</option>
-          <option value="和尚類">和尚類</option>
-          <option value="大蛋類">大蛋類</option>
-          <option value="吸蜜及其他">吸蜜及其他</option>
-          <option value="自訂分類">自訂分類</option>
-        </select>
-      </div>
-      <button class="btn-main" onclick="addCustomSpecies()">＋ 新增種類</button>
-    </div>
-  </div>
-
-  <nav class="bottom-nav">
-    <button class="bnav-btn active" onclick="switchTab('record',this)"><i class="ti ti-plus-circle"></i>新增收購</button>
-    <button class="bnav-btn" onclick="switchTab('weekly',this)"><i class="ti ti-calendar-week"></i>每週結算</button>
-    <button class="bnav-btn" onclick="switchTab('monthly',this)"><i class="ti ti-chart-bar"></i>每月報表</button>
-    <button class="bnav-btn" onclick="switchTab('species',this)"><i class="ti ti-leaf"></i>種類管理</button>
-  </nav>
-</div>
-
-<script>
-const DEFAULT_SPECIES={
-  "凱克類":["金凱","黑凱","綠腿"],
-  "月輪類":["綠月輪","黃白月輪","白頭系列","藍三白","花頭","藍月","哈密瓜","紫月輪","紫三白","藍派洛月"],
-  "小太陽類":["熊貓小太陽","香吉士","薄荷小太陽","珍珠","黑帽","黑帽閃光","桃額","金太陽","月亮","藍化","美國黃","玫瑰冠","赤紅腹","一般小太陽"],
-  "和尚類":["肉桂","奶油和尚","藍和尚","黃和尚","哈密瓜","白銀絲","雪白銀絲","黃金絲","白和尚","黃臉派洛","紫和尚","珊瑚藍"],
-  "大蛋類":["藍眼巴丹","灰鸚鵡","折衷","傘巴","大巴","琉璃","小黃帽","黃翼","黃領帽","巴拿馬","雙黃帽","度波","澄翅","大金黃","中巴","紅肩"],
-  "吸蜜及其他":["澳彩","賈丁","黑頭乙女","紅伶","翡翠吸蜜","塞內","紅星星","大黃兜","草甘","水蜜桃"]
-};
-
-let species=JSON.parse(localStorage.getItem('p_species')||'null')||JSON.parse(JSON.stringify(DEFAULT_SPECIES));
-let records=JSON.parse(localStorage.getItem('p_records')||'[]');
-let customSpecies=JSON.parse(localStorage.getItem('p_custom')||'[]');
-
-function save(){
-  localStorage.setItem('p_species',JSON.stringify(species));
-  localStorage.setItem('p_records',JSON.stringify(records));
-  localStorage.setItem('p_custom',JSON.stringify(customSpecies));
-}
-
-function today(){return new Date().toISOString().split('T')[0]}
-
-function getWeekKey(ds){
-  const d=new Date(ds),day=d.getDay(),diff=d.getDate()-day+(day===0?-6:1);
-  const m=new Date(d.setDate(diff));return m.toISOString().split('T')[0];
-}
-
-function fDateFull(s){if(!s)return'';const[y,m,d]=s.split('-');return`${y}年${parseInt(m)}月${parseInt(d)}日`}
-function fMoney(n){return Number(Math.round(n)).toLocaleString('zh-TW')+'元'}
-
-document.getElementById('today-label').textContent=fDateFull(today());
-document.getElementById('rec-date').value=today();
-
-function buildSpeciesSelect(){
-  const sel=document.getElementById('rec-species');
-  sel.innerHTML='';
-  for(const[cat,list]of Object.entries(species)){
-    const og=document.createElement('optgroup');og.label=cat;
-    list.forEach(s=>{const op=document.createElement('option');op.value=s+'|'+cat;op.textContent=s;og.appendChild(op)});
-    sel.appendChild(og);
-  }
-  if(customSpecies.length){
-    const og=document.createElement('optgroup');og.label='自訂種類';
-    customSpecies.forEach(s=>{const op=document.createElement('option');op.value=s.name+'|'+s.cat;op.textContent=s.name;og.appendChild(op)});
-    sel.appendChild(og);
-  }
-}
-
-function addRecord(){
-  const date=document.getElementById('rec-date').value;
-  const specVal=document.getElementById('rec-species').value;
-  const qty=parseInt(document.getElementById('rec-qty').value);
-  const cost=parseFloat(document.getElementById('rec-cost').value);
-  const sell=parseFloat(document.getElementById('rec-sell').value);
-  const city=document.getElementById('rec-city').value;
-  const seller=document.getElementById('rec-seller').value.trim();
-  const note=document.getElementById('rec-note').value.trim();
-  if(!date||!specVal||!qty||isNaN(cost)||isNaN(sell)){alert('請填寫：日期、種類、數量、成本、賣出價格');return}
-  const[specName,cat]=specVal.split('|');
-  records.push({id:Date.now(),date,specName,cat,qty,cost,sell,city,seller,note});
-  save();
-  ['rec-qty','rec-cost','rec-sell','rec-seller','rec-note'].forEach(id=>document.getElementById(id).value='');
-  document.getElementById('rec-city').value='';
-  renderThisWeek();
-  alert('✅ 新增成功！');
-  window.scrollTo(0,0);
-}
-
-function deleteRecord(id){
-  if(!confirm('確定刪除這筆記錄？'))return;
-  records=records.filter(r=>r.id!==id);save();renderThisWeek();
-}
-
-function renderThisWeek(){
-  const wk=getWeekKey(today());
-  const wr=records.filter(r=>getWeekKey(r.date)===wk);
-  const el=document.getElementById('this-week-records');
-  if(!wr.length){el.innerHTML='<div class="empty">📭 本週尚無收購記錄</div>';return}
-  const totalCost=wr.reduce((s,r)=>s+r.cost*r.qty,0);
-  const totalRev=wr.reduce((s,r)=>s+r.sell*r.qty,0);
-  const totalQty=wr.reduce((s,r)=>s+r.qty,0);
-  const profit=totalRev-totalCost;
-  el.innerHTML=`
-    <div class="metrics-grid">
-      <div class="metric"><div class="metric-label">本週總顆數</div><div class="metric-value">${totalQty} 顆</div></div>
-      <div class="metric"><div class="metric-label">預估利潤</div><div class="metric-value ${profit>=0?'green':'red'}">${fMoney(profit)}</div></div>
-      <div class="metric"><div class="metric-label">總成本</div><div class="metric-value red">${fMoney(totalCost)}</div></div>
-      <div class="metric"><div class="metric-label">預估營收</div><div class="metric-value green">${fMoney(totalRev)}</div></div>
-    </div>
-    ${wr.sort((a,b)=>b.date.localeCompare(a.date)).map(r=>{
-      const p=(r.sell-r.cost)*r.qty;
-      return`<div class="rec-item">
-        <div class="rec-head">
-          <div style="flex:1">
-            <div class="rec-name">${r.specName}<span class="badge">${r.cat}</span></div>
-            <div class="rec-date-label">${fDateFull(r.date)}${r.city?' · '+r.city:''}${r.seller?' · '+r.seller:''}</div>
-          </div>
-          <button class="btn-sm-del" onclick="deleteRecord(${r.id})"><i class="ti ti-trash"></i></button>
-        </div>
-        <div class="rec-row">
-          <div class="rec-info">數量 <span>${r.qty}顆</span></div>
-          <div class="rec-info">成本 <span>${r.cost.toLocaleString('zh-TW')}元</span></div>
-          <div class="rec-info">賣出 <span>${r.sell.toLocaleString('zh-TW')}元</span></div>
-        </div>
-        <div class="rec-profit ${p>=0?'profit-pos':'profit-neg'}">利潤：${fMoney(p)}</div>
-        ${r.note?`<div style="font-size:12px;color:var(--text2);margin-top:6px">備註：${r.note}</div>`:''}
-      </div>`}).join('')}`;
-}
-
-function buildWeekOptions(){
-  const weeks=[...new Set(records.map(r=>getWeekKey(r.date)))].sort().reverse();
-  const cur=getWeekKey(today());if(!weeks.includes(cur))weeks.unshift(cur);
-  const sel=document.getElementById('week-select');
-  sel.innerHTML=weeks.map(w=>{
-    const e=new Date(w);e.setDate(e.getDate()+6);
-    return`<option value="${w}">${fDateFull(w)} ～ ${fDateFull(e.toISOString().split('T')[0])}</option>`
-  }).join('');
-}
-
-function renderWeekly(){
-  buildWeekOptions();
-  const wk=document.getElementById('week-select').value;
-  const el=document.getElementById('weekly-content');
-  if(!wk){el.innerHTML='<div class="empty">無資料</div>';return}
-  const wr=records.filter(r=>getWeekKey(r.date)===wk);
-  if(!wr.length){el.innerHTML='<div class="empty">📭 本週尚無記錄</div>';return}
-  const totalCost=wr.reduce((s,r)=>s+r.cost*r.qty,0);
-  const totalRev=wr.reduce((s,r)=>s+r.sell*r.qty,0);
-  const totalQty=wr.reduce((s,r)=>s+r.qty,0);
-  const profit=totalRev-totalCost;
-  const margin=totalRev>0?((profit/totalRev)*100).toFixed(1):0;
-  const catS={};
-  wr.forEach(r=>{if(!catS[r.cat])catS[r.cat]={qty:0,cost:0,rev:0};catS[r.cat].qty+=r.qty;catS[r.cat].cost+=r.cost*r.qty;catS[r.cat].rev+=r.sell*r.qty});
-  el.innerHTML=`
-    <div class="summary-card">
-      <div class="sum-row"><span class="sum-label">總收購量</span><span class="sum-val">${totalQty} 顆</span></div>
-      <div class="sum-row"><span class="sum-label">總成本支出</span><span class="sum-val" style="color:var(--red)">${fMoney(totalCost)}</span></div>
-      <div class="sum-row"><span class="sum-label">總營業額</span><span class="sum-val" style="color:var(--green)">${fMoney(totalRev)}</span></div>
-      <div class="sum-row"><span class="sum-label">利潤率</span><span class="sum-val">${margin}%</span></div>
-      <div class="sum-row"><span class="sum-label" style="font-size:16px;color:var(--text);font-weight:600">本週利潤</span><span class="sum-val total-highlight ${profit<0?'neg':''}">${fMoney(profit)}</span></div>
-    </div>
-    <div class="sub-title">各分類彙整</div>
-    ${Object.entries(catS).map(([cat,d])=>{const p=d.rev-d.cost;return`
-      <div class="week-sum-item">
-        <div class="wsi-head"><span style="font-weight:600;font-size:16px">${cat}</span><span class="badge">${d.qty}顆</span></div>
-        <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:4px">
-          <span class="rec-info">成本 <span style="color:var(--red)">${fMoney(d.cost)}</span></span>
-          <span class="rec-info">營收 <span style="color:var(--green)">${fMoney(d.rev)}</span></span>
-          <span class="rec-info">利潤 <span class="${p>=0?'profit-pos':'profit-neg'}">${fMoney(p)}</span></span>
-        </div>
-      </div>`}).join('')}
-    <div class="sub-title" style="margin-top:16px">明細記錄</div>
-    ${wr.sort((a,b)=>b.date.localeCompare(a.date)).map(r=>{const p=(r.sell-r.cost)*r.qty;return`
-      <div class="rec-item">
-        <div class="rec-head">
-          <div><div class="rec-name">${r.specName}<span class="badge">${r.cat}</span></div>
-          <div class="rec-date-label">${fDateFull(r.date)}${r.city?' · '+r.city:''}${r.seller?' · '+r.seller:''}</div></div>
-        </div>
-        <div class="rec-row">
-          <span class="rec-info">數量 <span>${r.qty}顆</span></span>
-          <span class="rec-info">成本 <span>${r.cost.toLocaleString('zh-TW')}元</span></span>
-          <span class="rec-info">賣出 <span>${r.sell.toLocaleString('zh-TW')}元</span></span>
-        </div>
-        <div class="rec-profit ${p>=0?'profit-pos':'profit-neg'}">利潤：${fMoney(p)}</div>
-      </div>`}).join('')}`;
-}
-
-function buildMonthOptions(){
-  const months=[...new Set(records.map(r=>r.date.slice(0,7)))].sort().reverse();
-  const cur=today().slice(0,7);if(!months.includes(cur))months.unshift(cur);
-  const sel=document.getElementById('month-select');
-  sel.innerHTML=months.map(m=>{const[y,mo]=m.split('-');return`<option value="${m}">${y}年${parseInt(mo)}月</option>`}).join('');
-}
-
-function renderMonthly(){
-  buildMonthOptions();
-  const m=document.getElementById('month-select').value;
-  const el=document.getElementById('monthly-content');
-  if(!m){el.innerHTML='<div class="empty">無資料</div>';return}
-  const mr=records.filter(r=>r.date.startsWith(m));
-  if(!mr.length){el.innerHTML='<div class="empty">📭 本月尚無記錄</div>';return}
-  const totalCost=mr.reduce((s,r)=>s+r.cost*r.qty,0);
-  const totalRev=mr.reduce((s,r)=>s+r.sell*r.qty,0);
-  const totalQty=mr.reduce((s,r)=>s+r.qty,0);
-  const profit=totalRev-totalCost;
-  const weeks=[...new Set(mr.map(r=>getWeekKey(r.date)))].sort();
-  const[y,mo]=m.split('-');
-  el.innerHTML=`
-    <div class="summary-card">
-      <div class="sum-row"><span class="sum-label">${y}年${parseInt(mo)}月 總收購量</span><span class="sum-val">${totalQty} 顆</span></div>
-      <div class="sum-row"><span class="sum-label">總成本支出</span><span class="sum-val" style="color:var(--red)">${fMoney(totalCost)}</span></div>
-      <div class="sum-row"><span class="sum-label">總營業額</span><span class="sum-val" style="color:var(--green)">${fMoney(totalRev)}</span></div>
-      <div class="sum-row"><span class="sum-label" style="font-size:16px;color:var(--text);font-weight:600">月淨利潤</span><span class="sum-val total-highlight ${profit<0?'neg':''}">${fMoney(profit)}</span></div>
-    </div>
-    <div class="sub-title">各週彙整</div>
-    ${weeks.map(wk=>{
-      const wr2=mr.filter(r=>getWeekKey(r.date)===wk);
-      const wEnd=new Date(wk);wEnd.setDate(wEnd.getDate()+6);
-      const wc=wr2.reduce((s,r)=>s+r.cost*r.qty,0);
-      const wrr=wr2.reduce((s,r)=>s+r.sell*r.qty,0);
-      const wq=wr2.reduce((s,r)=>s+r.qty,0);
-      const wp=wrr-wc;
-      return`<div class="week-sum-item">
-        <div class="wsi-head"><span style="font-size:13px;color:var(--text2)">${fDateFull(wk)} ～ ${fDateFull(wEnd.toISOString().split('T')[0])}</span><span class="badge">${wq}顆</span></div>
-        <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:6px">
-          <span class="rec-info">成本 <span style="color:var(--red)">${fMoney(wc)}</span></span>
-          <span class="rec-info">營收 <span style="color:var(--green)">${fMoney(wrr)}</span></span>
-          <span class="rec-info">利潤 <span class="${wp>=0?'profit-pos':'profit-neg'}">${fMoney(wp)}</span></span>
-        </div>
-      </div>`}).join('')}`;
-}
-
-function renderSpecies(){
-  const el=document.getElementById('species-list');
-  let html='';
-  for(const[cat,list]of Object.entries(species)){
-    html+=`<div class="cat-section"><div class="cat-header">${cat}</div><div class="species-chips">${list.map(s=>`<span class="chip">${s}</span>`).join('')}</div></div>`;
-  }
-  if(customSpecies.length){
-    html+=`<div class="cat-section"><div class="cat-header">自訂種類</div><div class="species-chips">${customSpecies.map((s,i)=>`<span class="chip chip-del">${s.name} <small style="color:var(--text2);font-size:11px">${s.cat}</small><button onclick="deleteCustom(${i})">×</button></span>`).join('')}</div></div>`;
-  }
-  el.innerHTML=html;
-}
-
-function deleteCustom(i){
-  if(!confirm('確定刪除此種類？'))return;
-  customSpecies.splice(i,1);save();renderSpecies();buildSpeciesSelect();
-}
-
-function addCustomSpecies(){
-  const name=document.getElementById('new-species-name').value.trim();
-  const cat=document.getElementById('new-species-cat').value;
-  if(!name){alert('請輸入種類名稱');return}
-  customSpecies.push({name,cat});save();
-  document.getElementById('new-species-name').value='';
-  renderSpecies();buildSpeciesSelect();
-  alert('✅ 種類新增成功！');
-}
-
-function switchTab(t,btn){
-  document.querySelectorAll('.tab').forEach(el=>el.classList.remove('active'));
-  document.querySelectorAll('.bnav-btn').forEach(el=>el.classList.remove('active'));
-  document.getElementById('tab-'+t).classList.add('active');
-  btn.classList.add('active');
-  if(t==='weekly'){buildWeekOptions();renderWeekly()}
-  if(t==='monthly'){buildMonthOptions();renderMonthly()}
-  if(t==='species')renderSpecies();
-  window.scrollTo(0,0);
-}
-
-buildSpeciesSelect();
 renderThisWeek();
 </script>
 </body>
